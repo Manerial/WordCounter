@@ -1,12 +1,14 @@
 package launcher;
 
+import java.io.IOException;
+
 import wordCounterUtility.WordCounter;
 import wordCounterUtility.WordCounterFactory;
 
 public class Launcher {
 	private static String RESOURCES_PATH = System.getProperty("user.dir") + "\\resources\\TEST.txt";
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		WordCounter wordCounter = WordCounterFactory.createDefaultWordCounter();
 		wordCounter = WordCounterFactory.fillWordCounter(wordCounter, RESOURCES_PATH);
 		//wordCounter.displayWordsOccurences();

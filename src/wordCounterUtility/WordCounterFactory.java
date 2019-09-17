@@ -12,7 +12,7 @@ public class WordCounterFactory {
 	/**
 	 * Creates a new WordCounter with default parameters
 	 * minLength = 1
- 	 * nbOccurencesMin = 1;
+	 * nbOccurencesMin = 1;
 	 * nbOccurencesMax = 5000;
 	 * 
 	 * @return the new WordCounter
@@ -31,46 +31,44 @@ public class WordCounterFactory {
 	/**
 	 * Fill a WordCounter using a text file
 	 * 
-	 * @param wordCounter : the WordCounter to fill
-	 * @param filePath : the path of the file to use
+	 * @param wordCounter : The WordCounter to fill
+	 * @param filePath : The path of the file to use
 	 * @return the WordCounter filled with the text file
+	 * @throws IOException : All the IO exceptions
 	 */
-	public static WordCounter fillWordCounter(WordCounter wordCounter, String filePath) {		
-		try {
-			BufferedReader br = readFile(filePath);
-			String line;
-			while ((line = br.readLine()) != null) {
-				String[] wordslist = getWordListFromString(line);
-				for(String word : wordslist) {
-					wordCounter.addWord(word);
-				}
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public static WordCounter fillWordCounter(WordCounter wordCounter, String filePath) throws IOException {		
+		BufferedReader br = readFile(filePath);
+		String line;
+		while ((line = br.readLine()) != null) {
+			String[] wordslist = specialSplitString(line);
+			wordCounter.addWords(wordslist);
 		}
 		return wordCounter;
 	}
 
-	public static BufferedReader readFile(String path) throws FileNotFoundException {
-		InputStream ips = new FileInputStream(path);
+	/**
+	 * Uses a path and creates a new BufferedReader
+	 * 
+	 * @param filePath : The path to the file to read
+	 * @return a new BufferedReader to read the file
+	 * @throws FileNotFoundException
+	 */
+	public static BufferedReader readFile(String filePath) throws FileNotFoundException {
+		InputStream ips = new FileInputStream(filePath);
 		InputStreamReader ipsr = new InputStreamReader(ips);
 		return new BufferedReader(ipsr);
 	}
-	
+
 	/**
-	 * Split a string on spaces
+	 * Split a string on special characters
 	 * 
-	 * @param string : the string to split
+	 * @param string : The string to split
 	 * @return the list of words in the string
 	 */
-	public static String[] getWordListFromString(String string) {
-		return replaceSpaceChar(string).split(" ");
+	public static String[] specialSplitString(String string) {
+		return replaceSpecialCharacters(string).split(" ");
 	}
-	
+
 	/**
 	 * Replace the space characters
 	 * ("-", ",", "'", ".", "(", ")", "[", "]", etc...)
@@ -79,20 +77,20 @@ public class WordCounterFactory {
 	 * @param string : the string to use
 	 * @return the string without space-characters
 	 */
-	public static String replaceSpaceChar(String string) {
+	public static String replaceSpecialCharacters(String string) {
 		return string
-		.replace("-", " ")
-		.replace(".", " ")
-		.replace("'", " ")
-		.replace(",", " ")
-		.replace("\"", " ")
-		.replace(",", " ")
-		.replace("(", " ")
-		.replace(")", " ")
-		.replace("?", " ")
-		.replace("!", " ")
-		.replace(":", " ")
-		.replace("\u2026", " ")
-		.replace("\u2019", " ");
+				.replace("-", " ")
+				.replace(".", " ")
+				.replace("'", " ")
+				.replace(",", " ")
+				.replace("\"", " ")
+				.replace(",", " ")
+				.replace("(", " ")
+				.replace(")", " ")
+				.replace("?", " ")
+				.replace("!", " ")
+				.replace(":", " ")
+				.replace("\u2026", " ")
+				.replace("\u2019", " ");
 	}
 }

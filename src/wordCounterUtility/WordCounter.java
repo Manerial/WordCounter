@@ -2,7 +2,6 @@ package wordCounterUtility;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 public class WordCounter {
@@ -17,7 +16,7 @@ public class WordCounter {
 	public WordCounter() {
 		resetWordMap();
 	}
-	
+
 	/**
 	 * Add a new word to this WordCounter
 	 * 
@@ -31,19 +30,30 @@ public class WordCounter {
 			wordMap.put(word, 1);
 		}
 	}
-	
+
+	/**
+	 * Add a list of words to this WordCounter
+	 * 
+	 * @param wordslist
+	 */
+	public void addWords(String[] wordslist) {
+		for(String word : wordslist) {
+			this.addWord(word);
+		}
+	}
+
 	public void setWordMap(Map<String, Integer> wordList) {
 		this.wordMap = wordList;
 	}
-	
+
 	public void resetWordMap() {
 		wordMap = new TreeMap<String, Integer>();
 	}
-	
+
 	public Map<String, Integer> getWordMap() {
 		return wordMap;
 	}
-	
+
 	public int getWordOccurences(String word) {
 		return wordMap.get(word);
 	}
@@ -76,15 +86,12 @@ public class WordCounter {
 	 * Display the occurrences of all words
 	 */
 	public void displayWordsOccurences() {
-		Set<String> keySet =  wordMap.keySet();
-		Iterator<String> iter = keySet.iterator();
-		while(iter.hasNext()) {
-			String key = iter.next().toString();
-			if(lengthMatch(key)) {
-				int nbOccurrences = wordMap.get(key);
-				if(occurencesMatch(nbOccurrences)) {
-					System.out.println(key + " " + nbOccurrences);
-				}
+		Iterator<String> iteratorWords = wordMap.keySet().iterator();
+		while(iteratorWords.hasNext()) {
+			String word = iteratorWords.next().toString();
+			int nbOccurrences = wordMap.get(word);
+			if(checkLengthMatch(word) && checkOccurencesMatch(nbOccurrences)) {
+				System.out.println(word + " " + nbOccurrences);
 			}
 		}
 	}
@@ -93,26 +100,37 @@ public class WordCounter {
 	 * Display a global report of all words
 	 */
 	public void displayWordNumber() {
-		Set<String> keySet = wordMap.keySet();
-		Iterator<String> iter = keySet.iterator();
+		Iterator<String> iteratorWords = wordMap.keySet().iterator();
 		int amountWords = 0;
 		int sizeWordMap = 0;
-		while(iter.hasNext()) {
-			String key = iter.next().toString();
-			if(lengthMatch(key)) {
-				amountWords += wordMap.get(key);
+		while(iteratorWords.hasNext()) {
+			String word = iteratorWords.next().toString();
+			if(checkLengthMatch(word)) {
+				amountWords += wordMap.get(word);
 				sizeWordMap++;
 			}
 		}
 		System.out.println("Nombre de mots : " + amountWords);
 		System.out.println("Nombre de mots différents : " + sizeWordMap);
 	}
-	
-	public boolean occurencesMatch(int occurrences) {
+
+	/**
+	 * Check the number of occurrences match the conditions
+	 * 
+	 * @param occurrences : the number of occurrences of a word
+	 * @return true if the matching is true
+	 */
+	public boolean checkOccurencesMatch(int occurrences) {
 		return occurrences >= nbOccurencesMin && occurrences <= nbOccurencesMax;
 	}
-	
-	public boolean lengthMatch(String word) {
+
+	/**
+	 * Check if a word is length enough to match the required minimum length
+	 * 
+	 * @param word : the word to check
+	 * @return true if the word length is greater or equals than the min length
+	 */
+	public boolean checkLengthMatch(String word) {
 		return word.length() >= minLength;
 	}
 }
