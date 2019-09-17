@@ -34,7 +34,7 @@ public class WordCounter {
 	/**
 	 * Add a list of words to this WordCounter
 	 * 
-	 * @param wordslist
+	 * @param wordslist : the list to add
 	 */
 	public void addWords(String[] wordslist) {
 		for(String word : wordslist) {

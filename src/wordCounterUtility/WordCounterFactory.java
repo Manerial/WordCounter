@@ -51,7 +51,7 @@ public class WordCounterFactory {
 	 * 
 	 * @param filePath : The path to the file to read
 	 * @return a new BufferedReader to read the file
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException : All File Not Found exceptions
 	 */
 	public static BufferedReader readFile(String filePath) throws FileNotFoundException {
 		InputStream ips = new FileInputStream(filePath);
