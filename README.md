@@ -3,7 +3,6 @@
 A realy simple program that count the different words in a text
 
 ## How to use it ?
-
 First, get an IDE (Eclipse)
 
 1. Download Eclipse (The last version)
@@ -26,7 +25,6 @@ To launch it, you can :
 To change it : open the project from the Eclipse window -> open the src folder -> open the launcher package (folder) -> double click on Launcher.java
 
 ## RESOURCES
-
 This project uses one resources file, the text to parse (TEST.txt).
 
 This file is stored in the resources folder of the WordCounter project.
@@ -34,7 +32,6 @@ This file is stored in the resources folder of the WordCounter project.
 You can update it as much as you want (be careful to keep the same name into the JAVA program !).
 
 ## WordCounter
-
 This class uses 3 parameters to work.
 
 minLength : the minimum length of a word to parse
