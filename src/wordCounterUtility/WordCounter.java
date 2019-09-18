@@ -110,8 +110,8 @@ public class WordCounter {
 				sizeWordMap++;
 			}
 		}
-		System.out.println("Nombre de mots : " + amountWords);
-		System.out.println("Nombre de mots différents : " + sizeWordMap);
+		System.out.println("Number of words : " + amountWords);
+		System.out.println("Number of different words : " + sizeWordMap);
 	}
 
 	/**

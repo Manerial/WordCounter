@@ -14,6 +14,7 @@ public class Launcher {
 		//wordCounter.displayWordsOccurences();
 		wordCounter.displayWordNumber();
 		
+		System.out.println("---");
 
 		int minLength = 3;
 		int nbOccurencesMin = 3;
