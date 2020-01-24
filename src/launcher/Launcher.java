@@ -12,10 +12,10 @@ public class Launcher {
 
 	public static void main(String[] args) throws IOException {
 		BasicFunctions.clearFile(RESULT_PATH);
-		//testLetterCounter();
+		testLetterCounter();
 		testLetterCounterFile();
-		//testWordCounter();
-		//testWordCounterFile();
+		testWordCounter();
+		testWordCounterFile();
 	}
 
 	private static void testLetterCounter() throws IOException {
